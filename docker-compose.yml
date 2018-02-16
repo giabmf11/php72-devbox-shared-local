@@ -1,0 +1,42 @@
+version: '3'
+services:
+  web:
+    restart: always
+    #build: 
+    #   context: .
+    #   dockerfile: development.dockerfile
+    image: giabmf11/php72-upgrade
+    volumes:
+      - "~/Git/php-7.2-support:/home/magento2"
+      - "~/Git/php-7.2-support/.gitconfig:/home/magento2/.gitconfig"
+      - "~/Git/php-7.2-support/.composer:/home/magento2/.composer"
+      - "~/Git/php-7.2-support/.ssh:/home/magento2/.ssh"
+      - "~/Git/php-7.2-support/shared/logs/apache2:/var/log/apache2"
+      - "~/Git/php-7.2-support/shared/logs/php-fpm:/var/log/php-fpm"
+      - "~/Git/php-7.2-support/shared/configs/varnish:/home/magento2/configs/varnish"
+      - "~/Git/php-7.2-support/shared/.magento-cloud:/home/magento2/.magento-cloud"
+    environment:
+      - MAGENTO_BACKEND_PATH=admin
+      - MAGENTO_ADMIN_USER=admin
+      - MAGENTO_ADMIN_PASSWORD=admin123
+    ports:
+      - "80"
+      - "22"
+  db:
+    restart: always
+    image: mysql:5.6
+    ports:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=magento2
+    volumes:
+      - "./shared/var/logs/mysql:/var/log/mysql"
+
+  elasticsearch:
+      image: elasticsearch:2
+      ports:
+        - "9200"
+      volumes:
+      - "./shared/esdata:/usr/share/elasticsearch/data"
+      
