@@ -2,19 +2,19 @@ version: '3'
 services:
   web:
     restart: always
-    #build: 
-    #   context: .
-    #   dockerfile: development.dockerfile
-    image: giabmf11/php72-upgrade
+    build: 
+       context: .
+       dockerfile: dockerfile
+    #image: giabmf11/php72-upgrade
     volumes:
-      - "~/Git/php-7.2-support:/home/magento2"
-      - "~/Git/php-7.2-support/.gitconfig:/home/magento2/.gitconfig"
-      - "~/Git/php-7.2-support/.composer:/home/magento2/.composer"
-      - "~/Git/php-7.2-support/.ssh:/home/magento2/.ssh"
-      - "~/Git/php-7.2-support/shared/logs/apache2:/var/log/apache2"
-      - "~/Git/php-7.2-support/shared/logs/php-fpm:/var/log/php-fpm"
-      - "~/Git/php-7.2-support/shared/configs/varnish:/home/magento2/configs/varnish"
-      - "~/Git/php-7.2-support/shared/.magento-cloud:/home/magento2/.magento-cloud"
+      - "~/[MAGENTO_REPO_LOCATION]:/var/www/magento2"
+      - "~/.gitconfig:/home/magento2/.gitconfig"
+      - "~/.composer:/home/magento2/.composer"
+      - "~/.ssh:/home/magento2/.ssh"
+      - "./shared/logs/apache2:/var/log/apache2"
+      - "./shared/logs/php-fpm:/var/log/php-fpm"
+      - "./shared/configs/varnish:/home/magento2/configs/varnish"
+      - "./shared/.magento-cloud:/home/magento2/.magento-cloud"
     environment:
       - MAGENTO_BACKEND_PATH=admin
       - MAGENTO_ADMIN_USER=admin
@@ -39,4 +39,3 @@ services:
         - "9200"
       volumes:
       - "./shared/esdata:/usr/share/elasticsearch/data"
-      
