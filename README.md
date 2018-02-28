@@ -1,6 +1,6 @@
 # php72-devbox-shared-local
 
-This repository contains the files needed to create both a development and integration environment for Magento using 
+This repository contains the files needed to create a development environment for Magento using 
 docker containers.
 
 # Intro
@@ -8,9 +8,11 @@ docker containers.
 This image is designed to serve as a development environment for upgrading the Magento2 stack to php7.2. The Docker 
 image brings up three containers:
 
-Database: mySQL 5.6
-Redis, Varnish, Elasticsearch and RabbitMQ
-Web: PHP 7.2.1, Apache2
+**Database:** mySQL 5.6
+
+**Service:** Redis, Varnish, Elasticsearch and RabbitMQ
+
+**Web:** PHP 7.2.1, Apache2
 
 # Instructions
 
@@ -53,13 +55,13 @@ volumes:
 
 **Step 3**: Save docker-compose.yml
 
-**Step 4**: Go back to your terminal Build the web image.
+**Step 4**: Go back to your terminal and run the following command to build the web image.
 
 ```
 docker-compose build
 ```
 
-**Step 5**: Create the containers
+**Step 5**: Run the following command Create the containers by executing this command.
 
 ```
 docker-compose up -d
@@ -71,8 +73,8 @@ docker-compose up -d
 docker ps
 ```
 
-**Step 7**: Find the port docker is exposing for the web by running the the following command. The format will be 
-0.0.0.0:[port]. Copy the port. ex 32909
+**Step 7**: Run the following command to find the port docker is exposing for the web container's port 80. The format 
+will be 0.0.0.0:[port]. Copy the port. ex 32909
 
 ```
 docker-compose port web 80
